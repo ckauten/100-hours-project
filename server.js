@@ -10,9 +10,8 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 //MongoDB Connection
 let db,
-  dbConnectionStr =
-    'mongodb+srv://ckauten:Rut79418!@ai-test.onp6o1e.mongodb.net/?retryWrites=true&w=majority&appName=ai-test',
-  dbName = 'ai-test';
+  dbConnectionStr = process.env.dbConnectionStr;
+dbName = 'ai-test';
 
 MongoClient.connect(dbConnectionStr).then((client) => {
   console.log(`Connected to ${dbName} Database`);
