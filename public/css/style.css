@@ -6,6 +6,13 @@ html {
 * {
   box-sizing: border-box;
 }
+/* body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} */
+
 /* HEADER  */
 header {
   display: flex;
@@ -52,4 +59,42 @@ li {
 }
 .fa-user {
   margin-right: 0.5vw;
+}
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 93vh;
+  color: white;
+}
+#terminal {
+  display: flex;
+  height: 50vh;
+  width: 50vw;
+  background: rgb(6, 0, 12);
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  margin-bottom: 5vh;
+  font-size: 2.5rem;
+}
+.input {
+  width: 25vw;
+  font-size: 2rem;
+  color: white;
+  background-color: black;
+  border-radius: 5px;
+  overflow-y: hidden;
+  resize: none;
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+}
+#submit {
+  margin-left: 2vh;
+  font-size: 3rem;
 }

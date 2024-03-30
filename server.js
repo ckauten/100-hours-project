@@ -4,6 +4,10 @@ const MongoClient = require('mongodb').MongoClient;
 const PORT = 2121;
 require('dotenv').config();
 
+//OpenAI connection
+const OpenAI = require('openai');
+const openai = new OpenAI(process.env.OPENAI_API_KEY);
+
 //MongoDB Connection
 let db,
   dbConnectionStr =
@@ -24,6 +28,23 @@ app.use(express.json());
 //get request to render index.ejs
 app.get('/', (req, res) => {
   res.render('index.ejs');
+});
+
+//post method that sends to API and waits for response
+app.post('/generate-text', async (req, res) => {
+  const { prompt } = req.body; // Destructure 'prompt' from the request body
+  try {
+    const completion = await openai.chat.completions.create({
+      messages: [{ role: 'system', content: prompt }],
+      model: 'gpt-3.5-turbo',
+    });
+
+    // Send the extracted text back to the client
+    res.json({ text: completion.choices[0].message.content });
+  } catch (error) {
+    console.error('Failed to fetch OpenAI completion:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 //server listener
