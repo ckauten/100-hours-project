@@ -47,7 +47,8 @@ li {
   font-weight: 700;
 }
 #ai {
-  color: rgb(3, 201, 136);
+  /* color: rgb(3, 201, 136); */
+  color: rgb(204, 136, 153);
 }
 #login {
   display: flex;
