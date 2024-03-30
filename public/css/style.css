@@ -1,0 +1,55 @@
+html {
+  font-size: 62.5%;
+  font-family: 'Poppins';
+  background: rgb(64, 66, 88);
+}
+* {
+  box-sizing: border-box;
+}
+/* HEADER  */
+header {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  background: rgb(71, 78, 104);
+  height: 7vh;
+}
+
+/* NAV BAR */
+nav {
+  display: flex;
+  flex-direction: row;
+  font-size: 2.5rem;
+  list-style: none;
+  margin-left: 2.5vw;
+  color: white;
+}
+li {
+  display: flex;
+  align-items: center;
+  margin-right: 3vw;
+}
+
+/* LOGO */
+#prev,
+#ai {
+  display: flex;
+  text-decoration: none;
+  color: white;
+  font-size: 6rem;
+  font-weight: 700;
+}
+#ai {
+  color: rgb(3, 201, 136);
+}
+#login {
+  display: flex;
+  margin-left: auto;
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: white;
+  margin-right: 2.5vw;
+}
+.fa-user {
+  margin-right: 0.5vw;
+}
