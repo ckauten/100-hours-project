@@ -8,11 +8,21 @@ textarea.addEventListener('input', function () {
 });
 
 //event listeners for text boxes and button
+document.querySelector('#submit').addEventListener('click', generateText);
 
-document.querySelector('.user-area').addEventListener('click', async () => {
-  event.preventDefault();
+//submit key listener
+const textInput = document.querySelector('textarea');
+textInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    generateText();
+    textarea.value = '';
+    // Perform desired actions here
+  }
+});
+
+async function generateText() {
   const prompt = document.querySelector('textarea').value;
-  const response = await fetch('/generate-text', {
+  const response = await fetch('chatPage/sendAiReq', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,9 +32,10 @@ document.querySelector('.user-area').addEventListener('click', async () => {
 
   if (response.ok) {
     const data = await response.json();
-    document.getElementById('terminal').textContent = data.text;
-    console.log(data.text);
+    const chat = data.text;
+    document.querySelector('#output').textContent = chat;
+    console.log(chat);
   } else {
     console.error(`"Error from server"`);
   }
-});
+}

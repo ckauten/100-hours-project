@@ -1,52 +1,54 @@
 const express = require('express');
 const app = express();
-const MongoClient = require('mongodb').MongoClient;
-const PORT = 2121;
-require('dotenv').config();
+const mongoose = require('mongoose');
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const flash = require('express-flash');
+const logger = require('morgan');
+const connectDB = require('./config/database');
+const mainRoutes = require('./routes/main');
+const chatRoutes = require('./routes/chatPage');
 
 //OpenAI connection
 const OpenAI = require('openai');
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
-//MongoDB Connection
-let db,
-  dbConnectionStr = process.env.dbConnectionStr;
-dbName = 'ai-test';
+require('dotenv').config({ path: './config/.env' });
 
-MongoClient.connect(dbConnectionStr).then((client) => {
-  console.log(`Connected to ${dbName} Database`);
-  db = client.db(dbName);
-});
+// Passport config
+require('./config/passport')(passport);
 
-//setting up the server
+connectDB();
+
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(logger('dev'));
+// Sessions
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_STRING,
+      collectionName: 'sessions',
+    }),
+  })
+);
 
-//get request to render index.ejs
-app.get('/', (req, res) => {
-  res.render('index.ejs');
-});
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
-//post method that sends to API and waits for response
-app.post('/generate-text', async (req, res) => {
-  const { prompt } = req.body; // Destructure 'prompt' from the request body
-  try {
-    const completion = await openai.chat.completions.create({
-      messages: [{ role: 'system', content: prompt }],
-      model: 'gpt-3.5-turbo',
-    });
+app.use(flash());
 
-    // Send the extracted text back to the client
-    res.json({ text: completion.choices[0].message.content });
-  } catch (error) {
-    console.error('Failed to fetch OpenAI completion:', error);
-    res.status(500).send('Internal Server Error');
-  }
-});
+app.use('/', mainRoutes);
+app.use('/chatPage', chatRoutes);
 
 //server listener
-app.listen(process.env.PORT || PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}, you better catch it!`);
 });

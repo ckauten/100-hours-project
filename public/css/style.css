@@ -47,8 +47,8 @@ li {
   font-weight: 700;
 }
 #ai {
-  /* color: rgb(3, 201, 136); */
-  color: rgb(204, 136, 153);
+  color: rgb(3, 201, 136);
+  /* color: rgb(204, 136, 153); */
 }
 #login {
   display: flex;
@@ -70,7 +70,7 @@ li {
   height: 93vh;
   color: white;
 }
-#terminal {
+/* .terminal {
   display: flex;
   height: 50vh;
   width: 50vw;
@@ -78,8 +78,22 @@ li {
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  margin-bottom: 5vh;
   font-size: 2.5rem;
+  margin-bottom: 2.5vh;
+} */
+#output {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 47vh;
+  width: 48vw;
+  background: rgb(15, 0, 12);
+  border: solid 10px rgb(6, 0, 12);
+  border-radius: 10px;
+  padding: 2%;
+  font-size: 2.5rem;
+  margin-bottom: 2.5vh;
 }
 .input {
   width: 25vw;
@@ -96,6 +110,8 @@ li {
   align-items: center;
 }
 #submit {
-  margin-left: 2vh;
+  margin-left: 1vh;
   font-size: 3rem;
+  background: none;
+  border: none;
 }
