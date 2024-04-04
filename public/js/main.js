@@ -8,7 +8,9 @@ textarea.addEventListener('input', function () {
 });
 
 //event listeners for text boxes and button
-document.getElementById('submit').addEventListener('click', async () => {
+
+document.querySelector('.user-area').addEventListener('click', async () => {
+  event.preventDefault();
   const prompt = document.querySelector('textarea').value;
   const response = await fetch('/generate-text', {
     method: 'POST',
