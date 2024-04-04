@@ -21,6 +21,7 @@ document.getElementById('submit').addEventListener('click', async () => {
   if (response.ok) {
     const data = await response.json();
     document.getElementById('terminal').textContent = data.text;
+    console.log(data.text);
   } else {
     console.error(`"Error from server"`);
   }
