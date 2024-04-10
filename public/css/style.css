@@ -6,12 +6,31 @@ html {
 * {
   box-sizing: border-box;
 }
-/* body {
+
+.login-page {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-} */
+  height: 100vh;
+}
+.login-page #prev,
+.login-page #ai {
+  font-size: 10rem;
+  padding-bottom: 2vh;
+}
+
+.login-page .info {
+  font-size: 3rem;
+  padding: 2vh;
+  text-align: center;
+  color: white;
+}
+.login-page .signup {
+  margin-top: 2.5vh;
+  text-decoration: none;
+  font-size: 2rem;
+}
 
 /* HEADER  */
 header {

@@ -12,39 +12,27 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://kit.fontawesome.com/9e2575b702.js" crossorigin="anonymous"></script>
 
-    <title>Prevail</title>
+    <title>Prevail Login</title>
   </head>
-  <body>
-    <header>
-      <nav>
-        <!-- logo text coloring -->
-        <li>
-          <a href="#" id="prev">PREV<span id="ai">AI</span>L</a>
-        </li>
-        <!-- other links -->
-        <li>About</li>
-        <li>Resources</li>
-        <li>FAQ</li>
-        <li>Contact</li>
-      </nav>
-      <!-- ACCOUNT LOGIN -->
-      <a id="login" href="#"><i class="fa-solid fa-user"></i>Account</a>
-    </header>
+  <body class="body login-page">
+    <!-- logo -->
+    <a href="#" id="prev">PREV<span id="ai">AI</span>L</a>
 
-    <!--text area -->
-    <section class="mainContainer">
-      <!-- terminal screen -->
-      <div id="output">Hi:3</div>
-
-      <!-- user input area -->
-      <form class="user-area" action="">
-        <textarea class="input" id="autoresizing" placeholder="Say something!"></textarea>
-        <i id="submit" type="submit" class="fa-solid fa-arrow-up"></i>
-      </form>
-    </section>
-
-    <!-- chatbot -->
-
-    <script src="js/main.js"></script>
+    <!-- input boxes -->
+    <div class="info login">Login:</div>
+    <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+    <div class="alert alert-danger"><%= el.msg %></div>
+    <% }) %> <% } %> <% if (locals.messages.info) { %> <% messages.info.forEach( el => { %>
+    <div class="alert alert-danger"><%= el.msg %></div>
+    <% }) %> <% } %>
+    <form action="/login" method="POST">
+      <input type="email" name="email" placeholder="Email" />
+      <input type="password" name="password" placeholder="Password" />
+      <input type="submit" />
+    </form>
+    <a href="/signup" class="info signup"
+      >or <br />
+      click to sign up</a
+    >
   </body>
 </html>
